@@ -22,4 +22,6 @@ void fill_image(image i, uint16_t colour);
 void draw_image_indexed(image i, uint16_t* colour);
 void draw_image_indexed_8(image i, uint8_t* colour);
 
+
+
 #endif
