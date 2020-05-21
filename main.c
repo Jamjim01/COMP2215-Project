@@ -4,7 +4,6 @@
 #include <avr/io.h>
 #include <avr/interrupt.h>
 #include <util/delay.h>
-#include "ruota.h"
 #include "rios.h"
 #include "image.h"
 
@@ -25,12 +24,13 @@
 #define UP SWN
 #define DOWN SWS
 
-#define DEMO_TIME 300
+#define DEMO_TIME 400
 
 
 int gameState;
 uint16_t random_seed;
 int gameMode;
+int score = 0;
 
 // ------------------------------------------------------------------------------------------------
 // ---------------------------------------- Menu --------------------------------------------------
@@ -44,7 +44,7 @@ int number = 0;
 void menuState(){
     if(firstMenu){
         clear_screen();
-        display_string_xy("WELCOME TO THE MICROCONTROLLER DANCE MAT",40,30);
+        display_string_xy("WELCOME TO THE LAFORTUNA DANCE BOARD",40,30);
         display_string_xy("Left Click - Normal Mode",40,100);
         display_string_xy("Right Click - Inverse Mode",40,120);
 
@@ -157,7 +157,11 @@ int first2=1;
 int first1=1;
 int firstGo=1;
 
+int timeToComplete;
+
 void countdownState(){
+	timeToComplete = 160;
+	score=0;
 	if(counter <= 40 && first3){
 		display_string_xy("3", WIDTH/2 - 2, HEIGHT/2);
 		first3=0;
@@ -201,7 +205,7 @@ void drawState(){
 	output = getInstruction();
 	
 	display_string_xy(output, WIDTH/2 - 12, HEIGHT/2);
-
+	score += 1;
 	gameState=GUESS_STATE;
 
 	counter = 0;
@@ -218,31 +222,31 @@ char* getInstruction(){
 		}else{
 			currentInstruction = LEFT;
 		}
-		return "left";
+		return "Left";
 	}else if(number == 1){
 		if(gameMode){
 			currentInstruction = LEFT;
 		}else{
 			currentInstruction = RIGHT;
 		}
-		return "right";
+		return "Right";
 	}else if(number == 2){
 		if(gameMode){
 			currentInstruction = DOWN;
 		}else{
 			currentInstruction = UP;
 		}
-		return "up";
+		return "Up";
 	}else if(number == 3){
 		if(gameMode){
 			currentInstruction = UP;
 		}else{
 			currentInstruction = DOWN;
 		}
-		return "down";
+		return "Down";
 	}else if(number == 4){
 		currentInstruction = CENTRE;
-		return "centre";
+		return "Centre";
 	}else{
 		return "error";
 	}
@@ -255,8 +259,6 @@ char* getInstruction(){
 void guessState();
 void checkReleaseWin();
 void checkReleaseLose();
-
-int timeToComplete = 120;
 
 void guessState(){
 	if (get_switch_state(_BV(currentInstruction))) {
@@ -271,7 +273,7 @@ void guessState(){
 void checkReleaseWin(){
 	if (!get_switch_state(_BV(currentInstruction))) {
 		win_temp();
-		timeToComplete -= 2;
+		timeToComplete -= 4;
 		gameState = DRAW_STATE;
 	}else if(counter > timeToComplete){
 		gameState = RELEASE_STATE_LOSE;
@@ -295,6 +297,10 @@ void loseState(){
 	if(firstLose){
 		clear_screen();
 		display_string("UNLUCKY YOU LOSE!!!\n\nPress Enter to go back to menu");
+		char char_score[6555];
+		sprintf(char_score, "%d", score-1);
+		display_string_xy("YOU SCORED: ", 40,100);
+		display_string_xy(char_score, 110,100);
 		firstLose=0;
 		counter=0;
 	}else{
