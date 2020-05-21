@@ -33,7 +33,9 @@ The demo screen has instructions to press a button to start alongside colourful 
 # Included code
 
  -> Steve Gunn's code (adapted by Klaus-Peter Zauner) for the lcd
+ 
  -> Giacomo Meanti's code for creating random integers (from his Space Invaders game)
+ 
  -> Frank Vahid code (adapted by Klaus-Peter Zauner) for the rios scheduling
  
  I also took insipiration from nbojinov LaTowerRun main state controller code that I changed for my own purposes: https://github.com/nbojinov/LaTowerRun
