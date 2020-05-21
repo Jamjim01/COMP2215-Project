@@ -38,5 +38,9 @@ The demo screen has instructions to press a button to start alongside colourful 
  
  -> Frank Vahid code (adapted by Klaus-Peter Zauner) for the rios scheduling
  
- I also took insipiration from nbojinov LaTowerRun main state controller code that I changed for my own purposes: https://github.com/nbojinov/LaTowerRun
+ -> nbojinov code for the image.c fills images
+
+ -> I also took insipiration from nbojinov LaTowerRun main state controller code that I changed for my own purposes: https://github.com/nbojinov/LaTowerRun
+
+
 
