@@ -6,6 +6,7 @@
 #include <util/delay.h>
 #include "rios.h"
 #include "image.h"
+#include "ruota.h"
 
 
 #define MENU_STATE 0 
@@ -44,7 +45,7 @@ int number = 0;
 void menuState(){
     if(firstMenu){
         clear_screen();
-        display_string_xy("WELCOME TO THE LAFORTUNA DANCE BOARD",40,30);
+        display_string_xy("WELCOME TO THE LAFORTUNA DANCE MAT",40,30);
         display_string_xy("Left Click - Normal Mode",40,100);
         display_string_xy("Right Click - Inverse Mode",40,120);
 

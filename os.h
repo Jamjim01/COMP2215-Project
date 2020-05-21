@@ -25,7 +25,6 @@
 #include "lcd.h"
 #include "rios.h"
 #include "ruota.h"
-#include "ff.h"
 
 
 
@@ -34,7 +33,6 @@
 #define LED_TOGGLE  PINB  |=  _BV(PINB7)
 
 
-FATFS FatFs;
 
 void os_init(void);
 

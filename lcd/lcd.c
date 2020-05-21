@@ -167,8 +167,7 @@ void fill_rectangle(rectangle r, uint16_t col)
     }
 }
 
-void fill_rectangle_indexed(rectangle r, uint16_t* col)
-{
+void fill_rectangle_indexed(rectangle r, uint16_t *col) {
     uint16_t x, y;
     write_cmd(COLUMN_ADDRESS_SET);
     write_data16(r.left);
@@ -180,6 +179,7 @@ void fill_rectangle_indexed(rectangle r, uint16_t* col)
     for(x=r.left; x<=r.right; x++)
         for(y=r.top; y<=r.bottom; y++)
             write_data16(*col++);
+   
 }
 
 void fill_rectangle_indexed_8(rectangle r, uint8_t* col)
